@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = () => {
-    return axios.post(
+  const navigate = useNavigate();
+
+  const login = async () => {
+    await axios.post(
       "http://localhost:8080/immotarity/api/user/login",
       {
         email: email,
@@ -17,6 +19,8 @@ export const Login = () => {
         withCredentials: true,
       }
     );
+
+    navigate("/main");
   };
 
   return (
