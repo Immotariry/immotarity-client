@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const Signup = () => {
@@ -7,12 +7,16 @@ export const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const signup = () => {
-    return axios.post("http://localhost:8080/immotarity/api/user/signup", {
+  const navigate = useNavigate();
+
+  const signup = async () => {
+    await axios.post("http://localhost:8080/immotarity/api/user/signup", {
       email: email,
       username: name,
       password: password,
     });
+
+    navigate("/");
   };
 
   return (
